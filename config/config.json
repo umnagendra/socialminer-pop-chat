@@ -1,0 +1,15 @@
+{
+  "socialminer" : {
+    "host" : "10.78.95.233"
+  },
+
+  "chat" : {
+    "feedid" : "100003",
+    "author" : "Web Guest",
+    "title" : "New visitor on web page"
+  },
+
+  "popup" : {
+    "initdelay" : 20000
+  }
+}
