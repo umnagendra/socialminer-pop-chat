@@ -19,13 +19,50 @@
  * (http://developer.cisco.com) or the Cisco Technical Assistance Center
  */
 
+// globals
+var config;
+var session = {};
+
 /**
  * Executes on page load
  */
 $(document).ready(function () {
-        setTimeout(launchChatSession, 20000);
+        loadConfig();
+
+        // auto-initiate a chat to SocialMiner after a fixed duration
+        setTimeout(initiateChatToSocialMiner, config.popup.initdelay);
     }
 );
+
+/**
+ * Loads configs from config/config.json
+ */
+function loadConfig () {
+    console.log('Loading config...');
+    $.get({
+        url     : 'config/config.json',
+        async   : false,
+        success : function(configJson) {
+                    console.log('Loaded config: ' + JSON.stringify(configJson));
+                    config = configJson;
+                  },
+        error   : function(err) {
+                    console.log('Failed to load config. Error = ' + err);
+                  }
+        });
+}
+
+/**
+ * Initiates (POST) a chat request to SocialMiner
+ */
+function initiateChatToSocialMiner () {
+    console.log("Initiating chat request to SocialMiner " + config.socialminer.host);
+    restUtil.postChatRequest().done(function (data, textStatus, jqXHR) {
+        // update session
+        session.scRefURL = jqXHR.getResponseHeader(constants.locationHeader);
+        console.log("Injection of chat successful. SC RefURL = " + session.scRefURL);
+    });
+}
 
 function launchChatSession() {
         console.log('launching chat session...');
