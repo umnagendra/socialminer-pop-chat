@@ -22,18 +22,43 @@
 // Based on an open-source jQuery-UI based chatbox plugin
 // See https://github.com/dexterpu/jquery.ui.chatbox
 
-var options = {
-    id: 'popup_chat_div',
-    title: 'How may I help you?',
-    user: 'Rosie',
-    hidden: false,
-    width: 250,
-    offset: 20,
-    messageSent: function (id, user, msg) {
-                    alert('ID = ' + id + ', user = ' + user + 'msg = ' + msg);
-                 },
-    boxClosed: function (id) {
-        alert('Box closed. ID = ' + id);
+var chatbox_ui = {
+    /**
+     * Options for the popup chat widget
+     */
+    options : {
+                id: 'popup_chat_div',
+                title: 'How may I help you?',
+                user: 'Rosie',
+                hidden: false,
+                width: 250,
+                offset: 20,
+                messageSent: function (id, user, msg) {
+                    console.log('Message sent...');
+                },
+                boxClosed: function (id) {
+                    console.log('Box closed. ID = ' + id);
+                    // TODO - Delete the chat session
+                    // TODO - clear polling interval
+                }
+    },
+
+    /**
+     * Launch the chat widget using options specified above
+     */
+    launch : function () {
+        console.log('Displaying chat widget...');
+        $('#' + config.popup.elementid).chatbox(chatbox_ui.options);
+    },
+
+    /**
+     * Display an incoming message
+     *
+     * @param from - The sender of the message
+     * @param message - The content of the message
+     */
+    showIncomingMessage : function (from, message) {
+        $('#' + config.popup.elementid).chatbox('option', 'boxManager').addMsg(from, message);
     }
 };
 

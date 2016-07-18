@@ -6,10 +6,12 @@
   "chat" : {
     "feedid" : "100003",
     "author" : "Web Guest",
-    "title" : "New visitor on web page"
+    "title" : "New visitor on web page",
+    "pollingInterval" : 5000
   },
 
   "popup" : {
+    "elementid" : "popup_chat_div",
     "initdelay" : 20000
   }
 }

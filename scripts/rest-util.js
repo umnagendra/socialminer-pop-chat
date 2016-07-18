@@ -21,11 +21,22 @@
 
 var restUtil = {
     postChatRequest : function () {
-        console.log('Got request to post a chat request to SocialMiner ' + config.socialminer.host);
+        console.log('POSTing a chat request to SocialMiner ' + config.socialminer.host);
         return $.post({
             url         : constants.scheme + config.socialminer.host + constants.chatURI,
             data        : constructPostPayload(),
-            contentType : constants.xmlMIMEType
+            contentType : constants.xmlMIMEType,
+            crossDomain : true,
+            xhrFields   : { withCredentials : true } // Required to share session cookie while making cross-domain requests
+        });
+    },
+
+    getChatEvents : function (eventID) {
+        console.log('GETting chat events from SocialMiner ' + config.socialminer.host + ' since eventID ' + eventID);
+        return $.get({
+            url         : constants.scheme + config.socialminer.host + constants.chatURI + constants.chatEventsPathParam + eventID,
+            crossDomain : true,
+            xhrFields   : { withCredentials: true }  // Required to share session cookie while making cross-domain requests
         });
     }
 };

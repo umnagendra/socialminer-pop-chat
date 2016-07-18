@@ -60,12 +60,64 @@ function initiateChatToSocialMiner () {
     restUtil.postChatRequest().done(function (data, textStatus, jqXHR) {
         // update session
         session.scRefURL = jqXHR.getResponseHeader(constants.locationHeader);
+        session.latestEventID = 0;
+        session.launched = false;
         console.log("Injection of chat successful. SC RefURL = " + session.scRefURL);
+
+        // start polling for chat events from SocialMiner
+        setInterval(pollForChatEvents, config.chat.pollingInterval);
     });
 }
 
-function launchChatSession() {
-        console.log('launching chat session...');
-        $('#popup_chat_div').chatbox(options);
-        $('#popup_chat_div').chatbox('option', 'boxManager').addMsg('Rosie', 'Welcome to our web page! How may I help you?');
+/**
+ * Does one poll for chat events from SocialMiner, parses the set of events
+ * received and updates the chat accordingly
+ */
+function pollForChatEvents () {
+    console.log('Starting to poll for chat events every ' + config.chat.pollingInterval + ' milliseconds...');
+    restUtil.getChatEvents(session.latestEventID).done(function (data, textStatus, jqXHR) {
+        // parse the XML response
+        var chatEvents = $.xml2json(data);
+        console.log('Received chat events: ' + JSON.stringify(chatEvents));
+
+        // process message events
+        if (chatEvents && chatEvents.MessageEvent) {
+            if (!session.launched) {
+                chatbox_ui.launch();
+                session.launched = true;
+            }
+            processIncomingMessages(chatEvents.MessageEvent);
+        }
+    });
+}
+
+/**
+ * Processes incoming MessageEvents
+ *
+ * @param messages
+ */
+function processIncomingMessages(messages) {
+    if ($.isArray(messages)) {
+        for (var i = 0; i < messages.length; i++) {
+            chatbox_ui.showIncomingMessage(decodeString(messages[i].from), decodeString(messages[i].body));
+            session.latestEventID = parseInt(messages[i].id);
+        }
+    } else {
+        chatbox_ui.showIncomingMessage(decodeString(messages.from), decodeString(messages.body));
+        session.latestEventID = parseInt(messages.id);
+    }
+}
+
+/**
+ * Decode a string carried in a MessageEvent body field.
+ *
+ * @param str the string to be decoded
+ * @returns the decoded string
+ */
+function decodeString (str)
+{
+    str = decodeURIComponent(str.replace(/\+/g,  " "));
+    str = str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\"/g,'&quot;').replace(/\'/g,'&#x27;').replace(/\//g,'&#x2f;');
+
+    return str;
 }

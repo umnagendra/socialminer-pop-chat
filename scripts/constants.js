@@ -25,6 +25,7 @@ var constants = {
     scheme              : 'http://',
     feedRefURL          : '/ccp-webapp/ccp/feed/',
     chatURI             : '/ccp/chat',
+    chatEventsPathParam : '?all=false&eventid=',
     locationHeader      : 'Location',
     xmlMIMEType         : 'application/xml'
 };
