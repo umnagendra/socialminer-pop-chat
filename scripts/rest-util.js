@@ -72,6 +72,12 @@ function constructPostPayload () {
                                 '<feedRefURL>' + feedRefURL + '</feedRefURL>' +
                                 '<author>' + config.chat.author  + '</author>' +
                                 '<title>' + config.chat.title  + '</title>' +
+                                '<extensionFields>' +
+                                    '<extensionField>' +
+                                        '<name>ccxqueuetag</name>' +
+                                        '<value>' + constants.ccx_chat_csq_tag + config.chat.ccx_csq_id  + '</value>' +
+                                    '</extensionField>' +
+                                '</extensionFields>' +
                             '</SocialContact>';
 
     console.log ('Chat request (POST) : ' + chatPostPayload);

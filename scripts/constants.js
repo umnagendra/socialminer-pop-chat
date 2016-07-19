@@ -27,5 +27,6 @@ var constants = {
     chatURI             : '/ccp/chat',
     chatEventsPathParam : '?all=false&eventid=',
     locationHeader      : 'Location',
-    xmlMIMEType         : 'application/xml'
+    xmlMIMEType         : 'application/xml',
+    ccx_chat_csq_tag    : 'Chat_Csq'
 };
