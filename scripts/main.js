@@ -47,7 +47,7 @@ function loadConfig () {
                     config = configJson;
                   },
         error   : function(err) {
-                    console.log('Failed to load config. Error = ' + err);
+                    console.error('Failed to load config. Error = ' + err);
                   }
         });
 }
@@ -65,8 +65,11 @@ function initiateChatToSocialMiner () {
         console.log("Injection of chat successful. SC RefURL = " + session.scRefURL);
 
         // start polling for chat events from SocialMiner
-        setInterval(pollForChatEvents, config.chat.pollingInterval);
-    });
+        session.pollerID = setInterval(pollForChatEvents, config.chat.pollingInterval);
+    })
+        .fail(function (jqXHR, textStatus) {
+            console.error('Failed to initiate chat request! Response status = ' + jqXHR.status);
+        });
 }
 
 /**

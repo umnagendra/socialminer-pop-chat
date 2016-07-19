@@ -38,9 +38,12 @@ var chatbox_ui = {
                     restUtil.putChatMessage(msg);
                 },
                 boxClosed: function (id) {
-                    console.log('Box closed. ID = ' + id);
-                    // TODO - Delete the chat session
-                    // TODO - clear polling interval
+                    // stop polling for chat events
+                    clearInterval(session.pollerID);
+                    // delete chat session with SocialMiner
+                    restUtil.deleteChat().done(new function () {
+                        console.log('Chat session terminated successfully.');
+                    });
                 }
     },
 

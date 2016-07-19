@@ -51,7 +51,19 @@ var restUtil = {
             crossDomain : true,
             xhrFields   : { withCredentials: true }  // Required to share session cookie while making cross-domain requests
         });
+    },
+
+    deleteChat : function () {
+        console.log('DELETEing chat session with SocialMiner ' + config.socialminer.host);
+        // silly jQuery does not have a $.delete() ?!
+        return $.ajax({
+            type        : 'DELETE',
+            url         : constants.scheme + config.socialminer.host + constants.chatURI,
+            crossDomain : true,
+            xhrFields   : { withCredentials: true }  // Required to share session cookie while making cross-domain requests
+        });
     }
+
 };
 
 function constructPostPayload () {
