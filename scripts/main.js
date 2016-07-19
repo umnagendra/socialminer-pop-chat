@@ -99,11 +99,11 @@ function pollForChatEvents () {
 function processIncomingMessages(messages) {
     if ($.isArray(messages)) {
         for (var i = 0; i < messages.length; i++) {
-            chatbox_ui.showIncomingMessage(decodeString(messages[i].from), decodeString(messages[i].body));
+            chatbox_ui.showMessage(decodeString(messages[i].from), decodeString(messages[i].body));
             session.latestEventID = parseInt(messages[i].id);
         }
     } else {
-        chatbox_ui.showIncomingMessage(decodeString(messages.from), decodeString(messages.body));
+        chatbox_ui.showMessage(decodeString(messages.from), decodeString(messages.body));
         session.latestEventID = parseInt(messages.id);
     }
 }

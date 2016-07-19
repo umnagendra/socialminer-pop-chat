@@ -38,6 +38,19 @@ var restUtil = {
             crossDomain : true,
             xhrFields   : { withCredentials: true }  // Required to share session cookie while making cross-domain requests
         });
+    },
+
+    putChatMessage : function (message) {
+        console.log('PUTting chat message to SocialMiner ' + config.socialminer.host + '. Message = [' + message + ']');
+        // silly jQuery does not have a $.put() ?!
+        return $.ajax({
+            type        : 'PUT',
+            url         : constants.scheme + config.socialminer.host + constants.chatURI,
+            data        : constructMessagePayload(message),
+            contentType : constants.xmlMIMEType,
+            crossDomain : true,
+            xhrFields   : { withCredentials: true }  // Required to share session cookie while making cross-domain requests
+        });
     }
 };
 
@@ -51,4 +64,13 @@ function constructPostPayload () {
 
     console.log ('Chat request (POST) : ' + chatPostPayload);
     return chatPostPayload;
+}
+
+function constructMessagePayload (message) {
+    var chatMessagePayload =    '<Message>' +
+                                    '<body>' + message  + '</body>' +
+                                '</Message>';
+
+    console.log ('Chat message (PUT) : ' + chatMessagePayload);
+    return chatMessagePayload;
 }

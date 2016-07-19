@@ -29,12 +29,13 @@ var chatbox_ui = {
     options : {
                 id: 'popup_chat_div',
                 title: 'How may I help you?',
-                user: 'Rosie',
                 hidden: false,
                 width: 250,
                 offset: 20,
                 messageSent: function (id, user, msg) {
-                    console.log('Message sent...');
+                    chatbox_ui.showMessage(config.popup.myself, msg);
+                    // push the chat message to SocialMiner to be shown to agent
+                    restUtil.putChatMessage(msg);
                 },
                 boxClosed: function (id) {
                     console.log('Box closed. ID = ' + id);
@@ -52,12 +53,12 @@ var chatbox_ui = {
     },
 
     /**
-     * Display an incoming message
+     * Display a message
      *
      * @param from - The sender of the message
      * @param message - The content of the message
      */
-    showIncomingMessage : function (from, message) {
+    showMessage : function (from, message) {
         $('#' + config.popup.elementid).chatbox('option', 'boxManager').addMsg(from, message);
     }
 };

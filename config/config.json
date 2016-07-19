@@ -12,6 +12,7 @@
 
   "popup" : {
     "elementid" : "popup_chat_div",
-    "initdelay" : 20000
+    "initdelay" : 20000,
+    "myself" : "Me"
   }
 }
