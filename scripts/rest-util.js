@@ -77,6 +77,10 @@ function constructPostPayload () {
                                         '<name>ccxqueuetag</name>' +
                                         '<value>' + constants.ccx_chat_csq_tag + config.chat.ccx_csq_id  + '</value>' +
                                     '</extensionField>' +
+                                    '<extensionField>' +
+                                        '<name>h_Name</name>' +
+                                        '<value>' + config.chat.author + '</value>' +
+                                    '</extensionField>' +
                                 '</extensionFields>' +
                             '</SocialContact>';
 
