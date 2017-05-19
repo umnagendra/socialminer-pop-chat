@@ -37,8 +37,8 @@ This sample does the following:
 
 ## PREREQUISITES
 * Your favorite static web server
-* Cisco SocialMiner 11.5+
-* Cisco Unified CCX 11.5+ (with all chat configurations in place)
+* Cisco SocialMiner 11.5 SU (and future releases)
+* Cisco Unified CCX 11.5 (and future releases) with all chat configurations in place
 
 
 ## CONFIGURATION
