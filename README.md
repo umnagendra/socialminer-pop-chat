@@ -1,6 +1,7 @@
 # Unified CCX Live Chat Sample (via Cisco SocialMiner)
 Example illustrating a proactive customer-side pop-up live chat with Cisco Unified CCX web chat via Cisco SocialMiner
 
+![image](https://user-images.githubusercontent.com/990210/30850967-e7be3a9c-a2c4-11e7-962b-072797a3661b.png)
 
 ## DISCLAIMER
 The Proactive customer-side pop-up live chat sample is intended to serve as an example
