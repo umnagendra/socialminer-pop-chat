@@ -102,11 +102,11 @@ function pollForChatEvents () {
 function processIncomingMessages(messages) {
     if ($.isArray(messages)) {
         for (var i = 0; i < messages.length; i++) {
-            chatbox_ui.showMessage(decodeString(messages[i].from), decodeString(messages[i].body));
+            chatbox_ui.showMessage(decodeString(messages[i].from), translator.translate(decodeString(messages[i].body), config.translate.customer_lang));
             session.latestEventID = parseInt(messages[i].id);
         }
     } else {
-        chatbox_ui.showMessage(decodeString(messages.from), decodeString(messages.body));
+        chatbox_ui.showMessage(decodeString(messages.from), translator.translate(decodeString(messages.body), config.translate.customer_lang));
         session.latestEventID = parseInt(messages.id);
     }
 }

@@ -46,7 +46,7 @@ var restUtil = {
         return $.ajax({
             type        : 'PUT',
             url         : constants.scheme + config.socialminer.host + constants.chatURI,
-            data        : constructMessagePayload(message),
+            data        : constructMessagePayload(translator.translate(message, config.translate.agent_lang)),
             contentType : constants.xmlMIMEType,
             crossDomain : true,
             xhrFields   : { withCredentials: true }  // Required to share session cookie while making cross-domain requests

@@ -4,16 +4,23 @@
   },
 
   "chat" : {
-    "feedid" : "100020",
+    "feedid" : "100133",
     "author" : "Web Guest",
     "title" : "New visitor on web page",
     "ccx_csq_id" : 1,
     "pollingInterval" : 5000
   },
 
+  "translate" : {
+    "enabled": true,
+    "agent_lang": "en",
+    "customer_lang": "es",
+    "api_key": "GOOGLE_TRANSLATE_API_KEY"
+  },
+
   "popup" : {
     "elementid" : "popup_chat_div",
-    "initdelay" : 20000,
+    "initdelay" : 10000,
     "myself" : "Me"
   }
 }
