@@ -20,14 +20,12 @@
  */
 
 body {
-    background-color: #24726a;
     color: white;
-    font-family: monospace;
     height: 100%;
 }
 
 div.content {
-    border: 0.6em double white;
+    border: 0.25em solid blue;
     text-align: center;
 }
 
@@ -39,4 +37,13 @@ div.content h1 {
 
 div.content h3 {
     font-size: 2em;
+}
+
+.pageContent {
+    position: absolute;
+    margin: 20px;
+}
+
+.pageContent img {
+    height: 78vh;
 }
