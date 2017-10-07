@@ -35,6 +35,7 @@ This sample does the following:
 *  Thereby illustrates usage of SocialMiner chat feed APIs, and abilities to customize and extend Unified CCX
    web chat capabilities.
 
+![image](https://user-images.githubusercontent.com/990210/31310748-540c99d8-abbb-11e7-848d-67e6f03a2234.png)
 
 ## PREREQUISITES
 * Your favorite static web server
